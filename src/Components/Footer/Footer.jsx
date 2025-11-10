@@ -34,16 +34,16 @@ const Footer = () => {
           </button>
         </div>
       </div>
-      <div className="flex w-9/12 mx-auto justify-between pt-40 md:pt-30 pb-16 gap-15 text-white">
+      <div className="flex w-[95%] flex-col md:flex-row lg:w-9/12 mx-auto justify-between pt-40 md:pt-30 pb-16 gap-15 text-white text-center md:text-left">
         <div className="flex-1 flex flex-col gap-5">
-          <figure>
+          <figure className="justify-items-center md:justify-items-start">
             <img src={logo} className="h-8" alt="" />
           </figure>
           <p>
             Livora brings innovation and elegance together, crafting solutions
             that are both powerful and intuitive.
           </p>
-          <div className="flex gap-3">
+          <div className="flex gap-3 justify-center md:justify-start">
             <span className="bg-secondary p-3 duration-400 text-white hover:bg-white hover:text-primary cursor-pointer rounded-sm">
               <FaFacebookF />
             </span>
@@ -92,11 +92,11 @@ const Footer = () => {
             <FaMapMarker />
             <span>15 Orchard View, #09-03, Singapore 238890</span>
           </span>
-          <span className="flex items-center gap-2 ">
+          <span className="flex items-center gap-2 justify-center md:justify-start">
             <FaPhone />
             <span>+0 12345 67890</span>
           </span>
-          <span className="flex items-center gap-2 ">
+          <span className="flex items-center gap-2 justify-center md:justify-start">
             <IoIosMail />
             <span>info@livora.com</span>
           </span>

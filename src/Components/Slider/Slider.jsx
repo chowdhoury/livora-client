@@ -25,13 +25,13 @@ const Slider = () => {
             </figure>
             <p className="text-secondary font-semibold">WELCOME TO LIVORA</p>
           </div>
-          <h1 className="font-extrabold text-[70px] leading-tight">
+          <h1 className="font-extrabold lg:text-[70px] md:text-[50px] text-[30px] leading-tight">
             Invest Today in
             <br />
             Your Dream Home
           </h1>
 
-          <p className="my-8">
+          <p className="my-3 md:my-8">
             Livora brings elegance and purpose together — where thoughtful
             design meets everyday comfort. Every detail is crafted to inspire
             modern living, blending sophistication with simplicity. With Livora,

@@ -44,16 +44,16 @@ const Footer = () => {
             that are both powerful and intuitive.
           </p>
           <div className="flex gap-3">
-            <span className="bg-secondary p-3 text-white hover:bg-white hover:text-primary cursor-pointer rounded-sm">
+            <span className="bg-secondary p-3 duration-400 text-white hover:bg-white hover:text-primary cursor-pointer rounded-sm">
               <FaFacebookF />
             </span>
-            <span className="bg-secondary p-3 text-white hover:bg-white hover:text-primary cursor-pointer rounded-sm">
+            <span className="bg-secondary p-3 duration-400 text-white hover:bg-white hover:text-primary cursor-pointer rounded-sm">
               <FaInstagram />
             </span>
-            <span className="bg-secondary p-3 text-white hover:bg-white hover:text-primary cursor-pointer rounded-sm">
+            <span className="bg-secondary p-3 duration-400 text-white hover:bg-white hover:text-primary cursor-pointer rounded-sm">
               <FaXTwitter />
             </span>
-            <span className="bg-secondary p-3 text-white hover:bg-white hover:text-primary cursor-pointer rounded-sm">
+            <span className="bg-secondary p-3 duration-400 text-white hover:bg-white hover:text-primary cursor-pointer rounded-sm">
               <FaLinkedinIn />
             </span>
           </div>

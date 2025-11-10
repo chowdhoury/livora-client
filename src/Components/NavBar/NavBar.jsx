@@ -12,9 +12,9 @@ const NavBar = () => {
     }
   };
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
+  // const toggleDropdown = () => {
+  //   setIsDropdownOpen(!isDropdownOpen);
+  // };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -76,12 +76,6 @@ const NavBar = () => {
           My Ratings
         </NavLink>
       </li>
-      {/* <li>
-        <NavLink className={"hover:text-secondary duration-400"} to="/authentication/login">Login</NavLink>
-      </li>
-      <li>
-        <NavLink className={"hover:text-secondary duration-400"} to="/authentication/register">Signup</NavLink>
-      </li> */}
     </>
   );
   return (
@@ -89,7 +83,7 @@ const NavBar = () => {
       <input id="my-drawer-5" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         {/* Navbar content */}
-        <div className="flex justify-between items-center py-4 lg:w-9/12 w-full pr-5 pl-2 md:px-5 lg:px-0 mx-auto h-[60px] border my-4">
+        <div className="flex justify-between items-center py-4 lg:w-9/12 w-full pr-5 pl-2 md:px-5 lg:px-0 mx-auto h-[60px] my-4">
           <div className="flex gap-2">
             {/* Hamburger menu - only visible on small screens */}
             <label

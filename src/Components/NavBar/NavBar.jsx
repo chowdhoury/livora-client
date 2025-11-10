@@ -1,13 +1,33 @@
+import { useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router";
 import logo from "../../assets/logo.svg";
 
 const NavBar = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
   const closeDrawer = () => {
     const drawerToggle = document.getElementById("my-drawer-5");
     if (drawerToggle) {
       drawerToggle.checked = false;
     }
   };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const menuItems = (
     <>
@@ -105,20 +125,49 @@ const NavBar = () => {
               {menuItems}
             </ul>
           </div>
-          <div className="items-center gap-5 flex">
-            {/* <CgProfile /> */}
-            <Link
-              to={"/authentication/login"}
-              className="text-white font-semibold bg-secondary py-3.5 rounded-sm px-[30px]"
-            >
-              Login
-            </Link>
-            <Link
-              to={"/authentication/register"}
-              className="text-white font-semibold bg-secondary py-3.5 rounded-sm px-7 hidden md:block"
-            >
-              Signup
-            </Link>
+          <div className="relative" ref={dropdownRef}>
+            {/* <div>
+              <img
+                src="https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170"
+                className="h-13 rounded-full w-13 object-cover cursor-pointer"
+                onClick={toggleDropdown}
+                alt="Profile"
+              />
+
+              {isDropdownOpen && (
+                <ul className="absolute right-0 top-14 z-10 menu w-52 rounded-box bg-base-100 shadow-lg font-semibold text-primary">
+                  <li>
+                    <a>Item 1</a>
+                  </li>
+                  <li>
+                    <a>Item 2</a>
+                  </li>
+                  <li className="mt-4">
+                    <Link
+                      to={"/authentication/register"}
+                      className="text-white font-semibold bg-secondary hover:bg-primary duration-400 py-3 rounded-sm text-center"
+                    >
+                      Logout
+                    </Link>
+                  </li>
+                </ul>
+              )}
+            </div> */}
+            <div className="items-center gap-5 flex">
+              {/* <CgProfile /> */}
+              <Link
+                to={"/authentication/login"}
+                className="text-white font-semibold bg-secondary py-3.5 rounded-sm px-[30px] hover:bg-primary duration-400 cursor-pointer"
+              >
+                Login
+              </Link>
+              <Link
+                to={"/authentication/register"}
+                className="text-white font-semibold bg-secondary py-3.5 rounded-sm px-7 hidden md:block hover:bg-primary duration-400 cursor-pointer"
+              >
+                Signup
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -130,7 +179,7 @@ const NavBar = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu bg-base-200 min-h-full w-80 p-4">
+        <ul className="menu bg-base-200 min-h-full w-80 p-4 font-semibold text-primary">
           {menuItems}
           {/* Mobile-only signup button in drawer */}
           <li className="mt-4 block md:hidden">

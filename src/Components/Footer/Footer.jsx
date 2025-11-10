@@ -11,13 +11,13 @@ import logo from "../../assets/logo-white.svg";
 
 const Footer = () => {
   return (
-    <div className="bg-primary relative mt-20">
-      <div className="flex bg-base-200 w-9/12 mx-auto px-10 py-5 rounded-2xl items-center absolute left-1/2  -translate-x-1/2 -translate-y-1/2">
+    <div className="bg-primary relative mt-40">
+      <div className="flex flex-col lg:flex-row gap-5 lg:gap-0 bg-base-200 w-[95%] lg:w-9/12 lg:mx-auto px-10 py-5 rounded-2xl items-center absolute left-1/2  -translate-x-1/2 -translate-y-1/2">
         <div className="flex-1">
-          <h1 className="font-black text-primary text-[40px]">
+          <h1 className="font-black text-primary text-3xl text-center md:text-start mb-5 md:mb-0 md:text-[40px] ">
             Subscribe Our Newsletter
           </h1>
-          <p className="text-secondary-content">
+          <p className="text-secondary-content text-center lg:text-left">
             Duis pulvinar metus elit, ut aliquam est sollicitudin finibus.
           </p>
         </div>
@@ -34,7 +34,7 @@ const Footer = () => {
           </button>
         </div>
       </div>
-      <div className="flex w-9/12 mx-auto justify-between pt-30 pb-16 gap-15 text-white">
+      <div className="flex w-9/12 mx-auto justify-between pt-40 md:pt-30 pb-16 gap-15 text-white">
         <div className="flex-1 flex flex-col gap-5">
           <figure>
             <img src={logo} className="h-8" alt="" />

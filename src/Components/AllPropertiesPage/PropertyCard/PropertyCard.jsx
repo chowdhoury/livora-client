@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const PropertyCard = ({ property }) => {
-    const { category, image, name, userName, location, description, price } = property;
+    const { _id,category, image, name, userName, location, description, price } = property;
     return (
       <div className="bg-base-200 rounded-xl flex flex-col shadow-lg transition-shadow duration-300">
         <div className="relative">
@@ -17,7 +17,7 @@ const PropertyCard = ({ property }) => {
         </div>
         <div className="p-7">
           <h2 className="text-[22px] font-semibold ">{name}</h2>
-          <div className='flex justify-between items-center'>
+          <div className="flex justify-between items-center">
             <p className="text-secondary font-semibold">{userName}</p>
             <p className="text-secondary-content ">{location}</p>
           </div>
@@ -29,7 +29,7 @@ const PropertyCard = ({ property }) => {
           <div className="flex items-center justify-between mt-5">
             <h2 className="text-[22px] font-medium ">${price}</h2>
             <Link
-              to={"/authentication/login"}
+              to={`/properties/${_id}`}
               className="text-white font-semibold bg-secondary py-3.5 rounded-sm px-[30px] hover:bg-primary duration-400 cursor-pointer"
             >
               View Property

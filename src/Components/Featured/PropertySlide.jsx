@@ -4,7 +4,7 @@ import { GiHouseKeys } from "react-icons/gi";
 import { Link } from "react-router";
 
 const PropertySlide = ({ property }) => {
-  const { category,image, name,location, description, price} = property;
+  const { _id,category,image, name,location, description, price} = property;
   return (
     <div className="bg-white my-15 rounded-xl flex flex-col shadow-lg transition-shadow duration-300">
       <div className="relative">
@@ -28,7 +28,7 @@ const PropertySlide = ({ property }) => {
         <div className="flex items-center justify-between mt-5">
           <h2 className="text-[22px] font-medium ">${price}</h2>
           <Link
-            to={"/authentication/login"}
+            to={`/properties/${_id}`}
             className="text-white font-semibold bg-secondary py-3.5 rounded-sm px-[30px] hover:bg-primary duration-400 cursor-pointer"
           >
             View Property

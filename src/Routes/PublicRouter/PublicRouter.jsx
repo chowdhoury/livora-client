@@ -20,7 +20,8 @@ export const router = createBrowserRouter([
                 element:<Home></Home>
             },
             {
-                path: '/all-properties',
+                path: '/listed-properties',
+                loader: () => fetch('http://localhost:3000/api/properties'),
                 element: <AllProperties></AllProperties>
             },
             {
@@ -36,7 +37,7 @@ export const router = createBrowserRouter([
                 element: <Login></Login>
             },
             {
-                path: '/user/add-property',
+                path: '/user/list-property',
                 element: <AddProperties></AddProperties>
             },
             {

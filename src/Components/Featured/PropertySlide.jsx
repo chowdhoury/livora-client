@@ -31,7 +31,7 @@ const PropertySlide = ({ property }) => {
             to={"/authentication/login"}
             className="text-white font-semibold bg-secondary py-3.5 rounded-sm px-[30px] hover:bg-primary duration-400 cursor-pointer"
           >
-            Read More
+            View Property
           </Link>
         </div>
       </div>

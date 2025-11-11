@@ -43,19 +43,19 @@ const NavBar = () => {
       <li>
         <NavLink
           className={"hover:text-secondary duration-400"}
-          to="/all-properties"
+          to="/listed-properties"
           onClick={closeDrawer}
         >
-          All Properties
+          Listed Properties
         </NavLink>
       </li>
       <li>
         <NavLink
           className={"hover:text-secondary duration-400"}
-          to="/user/add-property"
+          to="/user/list-property"
           onClick={closeDrawer}
         >
-          Add Properties
+          List Property
         </NavLink>
       </li>
       <li>

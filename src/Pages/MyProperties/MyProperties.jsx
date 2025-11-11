@@ -1,10 +1,17 @@
 import React from 'react';
+import Heading from '../../Components/MyListings/Heading/Heading';
+import PropertyContainer from '../../Components/MyListings/PropertyContainer/PropertyContainer';
 
 const MyProperties = () => {
     return (
-        <div>
-            My Properties Page
-        </div>
+      <div>
+        <section>
+          <Heading />
+        </section>
+        <section>
+          <PropertyContainer />
+        </section>
+      </div>
     );
 };
 

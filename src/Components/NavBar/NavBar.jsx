@@ -64,7 +64,7 @@ const NavBar = () => {
           to="/user/my-properties"
           onClick={closeDrawer}
         >
-          My Properties
+          My Listings
         </NavLink>
       </li>
       <li>
@@ -73,7 +73,7 @@ const NavBar = () => {
           to="/user/my-ratings"
           onClick={closeDrawer}
         >
-          My Ratings
+          My Feedback
         </NavLink>
       </li>
     </>

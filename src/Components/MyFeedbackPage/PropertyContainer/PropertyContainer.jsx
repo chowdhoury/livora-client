@@ -1,22 +1,28 @@
-import React from "react";
-import { Link, useLoaderData } from "react-router";
+import { useEffect, useState } from "react";
 import PropertyCard from "../PropertyCard/PropertyCard";
-import Search from "../SearchFilterHelp/Search";
 import Filter from "../SearchFilterHelp/Filter";
 import Help from "../SearchFilterHelp/Help";
+import Search from "../SearchFilterHelp/Search";
 
 const PropertyContainer = () => {
-    const properties = useLoaderData();
-    // console.log(properties);
+  const [properties, setProperties] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:3000/api/properties")
+      .then((res) => res.json())
+      .then((data) => {
+        setProperties(data);
+        // console.log(data);
+      });
+  }, []);
   return (
     <div className="w-[95%] lg:w-9/12 mx-auto my-5 lg:my-30 gap-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
       <div className="col-span-2 grid grid-cols-1 md:grid-cols-2 gap-10">
-      <section className="mt-10 lg:hidden">
-        <Search />
-      </section>
-      <section className="md:mt-10 lg:hidden">
-        <Filter />
-      </section>
+        <section className="mt-10 lg:hidden">
+          <Search />
+        </section>
+        <section className="md:mt-10 lg:hidden">
+          <Filter />
+        </section>
         {properties.map((property) => (
           <PropertyCard key={property._id} property={property}></PropertyCard>
         ))}

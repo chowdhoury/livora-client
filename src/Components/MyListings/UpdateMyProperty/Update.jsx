@@ -9,23 +9,23 @@ const Update = ({ handleOpenModal }) => {
 
   return (
     <div
-      className="flex flex-col justify-center items-center text-center text-white fixed z-30 w-full h-full top-0 left-0 bg-[#2F3D7E]/80"
+      className="flex flex-col justify-center items-center text-center text-white fixed z-30 w-full h-full top-0 left-0 bg-[#2F3D7E]/80 overflow-y-auto py-4"
       onClick={() => handleOpenModal(false)}
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="max-w-3xl px-10 bg-[#F6F8FF]/70 py-7 rounded-2xl"
+        className="w-full max-w-3xl mx-4 md:mx-8 px-4 md:px-10 bg-[#F6F8FF]/70 py-4 md:py-7 rounded-2xl max-h-[90vh] md:max-h-[85vh] overflow-y-auto my-auto"
       >
         <figure className="flex justify-center">
           <img src={logo} className="h-5" alt="Logo" />
         </figure>
 
-        <h2 className="text-[50px] text-primary font-bold text-center leading-tight">
+        <h2 className="text-3xl md:text-[50px] text-primary font-bold text-center leading-tight mb-2 md:mb-4">
           Update Properties
         </h2>
 
         <form onSubmit={handleSubmit}>
-          <fieldset className="fieldset flex flex-col md:grid md:grid-cols-2 text-start gap-4">
+          <fieldset className="fieldset flex flex-col md:grid md:grid-cols-2 text-start gap-2 md:gap-4">
             <div>
               <label className="label text-[#333333]">User Name</label>
               <input
@@ -88,14 +88,17 @@ const Update = ({ handleOpenModal }) => {
                 Property Description
               </label>
               <textarea
-                className="input h-20 resize-none text-primary"
-                placeholder="Enter property description..."
+                name=""
+                className="bg-white rounded-sm text-primary p-2.5 w-full resize-none"
+                rows={1}
+                placeholder="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum, aspernatur voluptatum rem necessita tibus corrupti officia?"
+                id=""
               ></textarea>
             </div>
 
             <button
               type="submit"
-              className="text-white font-semibold bg-secondary py-2.5 rounded-sm px-[26px] hover:bg-primary duration-400 cursor-pointer col-span-2 mt-5"
+              className="text-white font-semibold bg-secondary py-2.5 rounded-sm px-4 md:px-[26px] hover:bg-primary duration-400 cursor-pointer col-span-1 md:col-span-2 mt-3 md:mt-5"
             >
               <span className="flex gap-2 items-center justify-center text-[16px]">
                 <GrUpdate />

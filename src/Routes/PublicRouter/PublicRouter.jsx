@@ -10,6 +10,7 @@ import UpdateProperties from "../../Pages/UpdateProperties/UpdateProperties";
 import MyRatings from "../../Pages/MyRatings/MyRatings";
 import PropertiesDetails from "../../Pages/PropertiesDetails/PropertiesDetails";
 import Error from "../../Pages/Error/Error";
+import ForgetPassword from "../../Pages/Authentication/ForgetPassword/ForgetPassword";
 
 export const router = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
             {
                 path:'/authentication/login',
                 element: <Login></Login>
+            },
+            {
+                path:'/authentication/forget-password',
+                element: <ForgetPassword></ForgetPassword>
             },
             {
                 path: '/user/list-property',

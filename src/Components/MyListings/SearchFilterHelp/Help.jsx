@@ -5,7 +5,7 @@ import logo from "../../../assets/logo-white.svg";
 const Help = () => {
   return (
     <div className="relative">
-      <div className="flex flex-col justify-center items-center text-center text-white absolute z-50 w-full h-full top-0 left-0 bg-[#2F3D7E]/60 rounded-2xl">
+      <div className="flex flex-col justify-center items-center text-center text-white absolute z-10 w-full h-full top-0 left-0 bg-[#2F3D7E]/60 rounded-2xl">
         <div className="max-w-3xl px-4">
           <figure className="flex justify-center mb-5">
             <img src={logo} className="h-5" alt="" />

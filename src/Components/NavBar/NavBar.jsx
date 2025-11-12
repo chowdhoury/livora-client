@@ -159,7 +159,7 @@ const NavBar = () => {
                 to={"/authentication/register"}
                 className="text-white font-semibold bg-secondary py-3.5 rounded-sm px-7 hidden md:block hover:bg-primary duration-400 cursor-pointer"
               >
-                Signup
+                Register
               </Link>
             </div>
           </div>
@@ -167,7 +167,7 @@ const NavBar = () => {
       </div>
 
       {/* Drawer sidebar */}
-      <div className="drawer-side">
+      <div className="drawer-side z-50">
         <label
           htmlFor="my-drawer-5"
           aria-label="close sidebar"

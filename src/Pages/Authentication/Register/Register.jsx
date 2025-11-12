@@ -11,7 +11,7 @@ const Register = () => {
     <div className="relative">
       <img
         src={house}
-        className="min-h-screen md:min-h-[800px] lg:min-h-screen  w-full -mb-40"
+        className="min-h-screen md:min-h-[800px] lg:max-h-screen  w-full -mb-40"
         alt=""
       />
       <div className="flex flex-col justify-center items-center text-center text-white absolute z-10 w-full h-full top-0 left-0 bg-[#2F3D7E]/60">

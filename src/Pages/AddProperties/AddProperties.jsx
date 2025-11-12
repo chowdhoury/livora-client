@@ -2,13 +2,14 @@ import { RiResetLeftLine } from "react-icons/ri";
 import { Link } from "react-router";
 import house from "../../assets/house6.jpg";
 import logo from "../../assets/logo.svg";
+import { CiCircleList } from "react-icons/ci";
 
 const AddProperties = () => {
   return (
     <div className="relative">
       <img
         src={house}
-        className="min-h-[1200px] md:min-h-[800px] lg:min-h-screen w-full -mb-40"
+        className="min-h-[1200px] md:min-h-[800px] lg:max-h-screen w-full -mb-40"
         alt=""
       />
       <div className="flex flex-col justify-center items-center text-center text-white absolute z-10 w-full h-full top-0 left-0 bg-[#2F3D7E]/60">
@@ -107,9 +108,9 @@ const AddProperties = () => {
               >
                 <span className="flex gap-2 items-center justify-center text-[16px]">
                   <span>
-                    <RiResetLeftLine />
+                    <CiCircleList />
                   </span>
-                  Reset
+                  List
                 </span>
               </Link>
             </fieldset>

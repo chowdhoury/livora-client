@@ -1,12 +1,21 @@
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Link } from "react-router";
+import Update from "../UpdateMyProperty/Update";
+import { useState } from "react";
 
 const PropertyCard = ({ property }) => {
   const { _id, category, image, name, location, createdAt, description, price } =
     property;
+  const [openModal, setOpenModal] = useState(false);
+  const handleOpenModal = () => {
+    setOpenModal(!openModal);
+  }
   return (
     <div className="bg-base-200 rounded-xl flex flex-col shadow-lg transition-shadow duration-300">
+      <section className={openModal ? "block" : "hidden"}>
+        <Update handleOpenModal={handleOpenModal}></Update>
+      </section>
       <div className="relative">
         <img
           src={image}
@@ -41,15 +50,13 @@ const PropertyCard = ({ property }) => {
         </div>
         <hr className="text-secondary-content opacity-50" />
         <div className="flex items-center justify-between mt-5">
-          <Link
-            to={`/properties/${_id}`}
-            className="text-white font-semibold bg-secondary py-3.5 rounded-sm px-[30px] hover:bg-primary duration-400 cursor-pointer flex items-center gap-2"
-          >
+          <button className="text-white font-semibold bg-secondary py-3.5 rounded-sm px-[30px] hover:bg-primary duration-400 cursor-pointer flex items-center gap-2"
+            onClick={()=>handleOpenModal(true)}>
             <span className="text-[20px]">
               <FaRegEdit />
             </span>
             <span>Update</span>
-          </Link>
+          </button>
           <Link
             to={`/properties/${_id}`}
             className="text-white font-semibold bg-secondary py-3.5 rounded-sm px-[30px] hover:bg-red-600 duration-400 cursor-pointer flex items-center gap-2"

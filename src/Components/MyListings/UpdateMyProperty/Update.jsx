@@ -1,10 +1,57 @@
 import { GrUpdate } from "react-icons/gr";
 import logo from "../../../assets/logo.svg";
+import { use, useContext } from "react";
+import AuthContext from "../../../Auth/AuthContext/AuthContext";
+import { toast } from "react-toastify";
 
-const Update = ({ handleOpenModal }) => {
+const Update = ({ handleOpenModal, property, setRefresh, refresh }) => {
+  // console.log(property);
+  const {
+    _id,
+    category,
+    image,
+    name,
+    location,
+    price,
+    userName,
+    userEmail,
+    description,
+  } = property;
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Update logic here
+    const form = e.target;
+    const updatedName = form.name.value;
+    const updatedCategory = form.category.value;
+    const updatedImage = form.image.value;
+    const updatedLocation = form.location.value;
+    const updatedPrice = form.price.value;
+    const updatedDescription = form.description.value;
+    const updatedProperty = {
+      name: updatedName,
+      category: updatedCategory,
+      image: updatedImage,
+      location: updatedLocation,
+      price: updatedPrice,
+      description: updatedDescription,
+    };
+    fetch(`http://localhost:3000/api/properties/${_id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedProperty),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setRefresh(!refresh);
+        console.log(data);
+        handleOpenModal(false);
+        toast.success("Property updated successfully!");
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error("Failed to update property.");
+      });
   };
 
   return (
@@ -32,6 +79,8 @@ const Update = ({ handleOpenModal }) => {
                 type="text"
                 className="input min-w-full text-primary"
                 placeholder="Your Name"
+                defaultValue={userName}
+                readOnly
               />
 
               <label className="label text-[#333333] mt-2">Property Name</label>
@@ -39,10 +88,16 @@ const Update = ({ handleOpenModal }) => {
                 type="text"
                 className="input min-w-full text-primary"
                 placeholder="Golden Villa"
+                defaultValue={name}
+                name="name"
               />
 
               <label className="label text-[#333333] mt-2">Category</label>
-              <select className="input min-w-full text-primary" defaultValue="">
+              <select
+                className="input min-w-full text-primary"
+                defaultValue={category}
+                name="category"
+              >
                 <option value="" disabled>
                   Select Category
                 </option>
@@ -57,6 +112,8 @@ const Update = ({ handleOpenModal }) => {
                 type="url"
                 className="input min-w-full text-primary"
                 placeholder="https://image.com"
+                defaultValue={image}
+                name="image"
               />
             </div>
 
@@ -66,6 +123,8 @@ const Update = ({ handleOpenModal }) => {
                 type="email"
                 className="input min-w-full text-primary"
                 placeholder="example@abc.com"
+                defaultValue={userEmail}
+                readOnly
               />
 
               <label className="label text-[#333333] mt-2">
@@ -75,6 +134,8 @@ const Update = ({ handleOpenModal }) => {
                 type="text"
                 className="input min-w-full text-primary"
                 placeholder="New York, USA"
+                defaultValue={location}
+                name="location"
               />
 
               <label className="label text-[#333333] mt-2">Costings</label>
@@ -82,17 +143,20 @@ const Update = ({ handleOpenModal }) => {
                 type="number"
                 className="input min-w-full text-primary"
                 placeholder="50000"
+                defaultValue={price}
+                name="price"
               />
 
               <label className="label text-[#333333] mt-2">
                 Property Description
               </label>
               <textarea
-                name=""
                 className="bg-white rounded-sm text-primary p-2.5 w-full resize-none"
                 rows={1}
-                placeholder="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum, aspernatur voluptatum rem necessita tibus corrupti officia?"
+                placeholder="Property Description"
                 id=""
+                name="description"
+                defaultValue={description}
               ></textarea>
             </div>
 

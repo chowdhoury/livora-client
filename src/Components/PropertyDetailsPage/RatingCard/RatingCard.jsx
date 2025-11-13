@@ -1,15 +1,20 @@
+import { Rating } from '@smastrom/react-rating';
 import React from 'react';
 
-const RatingCard = () => {
-    return (
-      <div className="bg-base-200 rounded-2xl p-10">
-        <h1 className="text-secondary font-bold mb-1">
-          User Email on 26-02-22
-        </h1>
-        <div>Ratings here</div>
-        <p className="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, aspernatur voluptatum rem necessitatibus corrupti officia?</p>
+const RatingCard = ({ ratingReview }) => {
+  const { userEmail, rating, description, createdAt } = ratingReview;
+  return (
+    <div className="bg-base-200 rounded-2xl p-10">
+      <h1 className="text-secondary font-bold mb-1">
+        {userEmail.slice(0, 1) + "*****@" + userEmail.split("@")[1]+" "}
+         on {createdAt.split("T")[0]}
+      </h1>
+      <div>
+        <Rating style={{ maxWidth: 180 }} value={rating} readOnly />
       </div>
-    );
+      <p className="mt-2">{description || "Review not given by the user."}</p>
+    </div>
+  );
 };
 
 export default RatingCard;

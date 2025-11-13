@@ -1,10 +1,27 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router";
 import logo from "../../assets/logo.svg";
+import AuthContext from "../../Auth/AuthContext/AuthContext";
+import { toast } from "react-toastify";
 
 const NavBar = () => {
+  const { user, logOutUser } = useContext(AuthContext);
+  const { displayName, photoURL, email } = user || {};
+
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+
+  const handleLogOut = () => {
+    logOutUser()
+      .then(() => {
+        toast.success("Logged out successfully");
+      })
+      .catch((error) => {
+        toast.error(`Error logging out: ${error.message}`);
+      });
+  };
+
   const closeDrawer = () => {
     const drawerToggle = document.getElementById("my-drawer-5");
     if (drawerToggle) {
@@ -12,10 +29,7 @@ const NavBar = () => {
     }
   };
 
-  // const toggleDropdown = () => {
-  //   setIsDropdownOpen(!isDropdownOpen);
-  // };
-
+  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -24,73 +38,83 @@ const NavBar = () => {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Navbar menu links
   const menuItems = (
     <>
       <li>
         <NavLink
-          className={"hover:text-secondary duration-400"}
+          className="hover:text-secondary duration-400"
           to="/"
           onClick={closeDrawer}
         >
           Home
         </NavLink>
       </li>
+
       <li>
         <NavLink
-          className={"hover:text-secondary duration-400"}
+          className="hover:text-secondary duration-400"
           to="/listed-properties"
           onClick={closeDrawer}
         >
           Listed Properties
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          className={"hover:text-secondary duration-400"}
-          to="/user/list-property"
-          onClick={closeDrawer}
-        >
-          List Property
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          className={"hover:text-secondary duration-400"}
-          to="/user/my-properties"
-          onClick={closeDrawer}
-        >
-          My Listings
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          className={"hover:text-secondary duration-400"}
-          to="/user/my-ratings"
-          onClick={closeDrawer}
-        >
-          My Feedback
-        </NavLink>
-      </li>
+
+      {user && (
+        <>
+          <li>
+            <NavLink
+              className="hover:text-secondary duration-400"
+              to="/user/list-property"
+              onClick={closeDrawer}
+            >
+              List Property
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink
+              className="hover:text-secondary duration-400"
+              to="/user/my-properties"
+              onClick={closeDrawer}
+            >
+              My Listings
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink
+              className="hover:text-secondary duration-400"
+              to="/user/my-ratings"
+              onClick={closeDrawer}
+            >
+              My Feedback
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
+
   return (
     <div className="drawer drawer-end">
       <input id="my-drawer-5" type="checkbox" className="drawer-toggle" />
+
       <div className="drawer-content">
-        {/* Navbar content */}
+        {/* Navbar */}
         <div className="flex justify-between items-center py-4 lg:w-9/12 w-full pr-5 pl-2 md:px-5 lg:px-0 mx-auto h-[60px] my-4">
-          <div className="flex gap-2">
-            {/* Hamburger menu - only visible on small screens */}
+          {/* Left side */}
+          <div className="flex gap-2 items-center">
+            {/* Mobile hamburger */}
             <label
               htmlFor="my-drawer-5"
               className="lg:hidden swap swap-rotate cursor-pointer"
             >
-              {/* hamburger icon */}
+              {/* open icon */}
               <svg
                 className="swap-off fill-current"
                 xmlns="http://www.w3.org/2000/svg"
@@ -112,56 +136,66 @@ const NavBar = () => {
                 <polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
               </svg>
             </label>
-            <img src={logo} className="h-8" alt="" />
+
+            {/* Logo */}
+            <img src={logo} className="h-8" alt="Logo" />
           </div>
+
+          {/* Desktop menu */}
           <div className="lg:block hidden">
             <ul className="flex gap-5 font-semibold text-primary">
               {menuItems}
             </ul>
           </div>
-          <div className="relative" ref={dropdownRef}>
-            {/* <div>
-              <img
-                src="https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170"
-                className="h-13 rounded-full w-13 object-cover cursor-pointer"
-                onClick={toggleDropdown}
-                alt="Profile"
-              />
 
-              {isDropdownOpen && (
-                <ul className="absolute right-0 top-14 z-10 menu w-52 rounded-box bg-base-100 shadow-lg font-semibold text-primary">
-                  <li>
-                    <a>Item 1</a>
-                  </li>
-                  <li>
-                    <a>Item 2</a>
-                  </li>
-                  <li className="mt-4">
+          {/* Right side (Profile or Login/Register) */}
+          <div className="relative" ref={dropdownRef}>
+            {user ? (
+              <div>
+                <img
+                  src={
+                    photoURL ||
+                    "https://i.postimg.cc/CKF63PxH/default-avatar-photo-placeholder-icon-grey-vector-38594397.avif"
+                  }
+                  className="h-13 w-13 rounded-full object-cover cursor-pointer"
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  alt="Profile"
+                />
+
+                {/* Dropdown */}
+                {isDropdownOpen && (
+                  <div className="absolute right-0 mt-2 bg-base-200 w-60 rounded-md shadow-lg z-50 p-4 flex flex-col">
+                    <p className="font-semibold text-secondary-content">
+                      {displayName}
+                    </p>
+                    <p className="text-sm text-primary mt-1">{email}</p>
+
                     <Link
-                      to={"/authentication/register"}
-                      className="text-white font-semibold bg-secondary hover:bg-primary duration-400 py-3 rounded-sm text-center"
+                      onClick={handleLogOut}
+                      className="text-white font-semibold bg-secondary py-3 rounded-md px-4 hover:bg-primary duration-300 text-center w-full mt-5"
                     >
-                      Logout
+                      Sign Out
                     </Link>
-                  </li>
-                </ul>
-              )}
-            </div> */}
-            <div className="items-center gap-5 flex">
-              {/* <CgProfile /> */}
-              <Link
-                to={"/authentication/login"}
-                className="text-white font-semibold bg-secondary py-3.5 rounded-sm px-[30px] hover:bg-primary duration-400 cursor-pointer"
-              >
-                Login
-              </Link>
-              <Link
-                to={"/authentication/register"}
-                className="text-white font-semibold bg-secondary py-3.5 rounded-sm px-7 hidden md:block hover:bg-primary duration-400 cursor-pointer"
-              >
-                Register
-              </Link>
-            </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="items-center gap-5 flex">
+                <Link
+                  to={"/authentication/login"}
+                  className="text-white font-semibold bg-secondary py-3.5 rounded-sm px-[30px] hover:bg-primary duration-400 cursor-pointer"
+                >
+                  Login
+                </Link>
+
+                <Link
+                  to={"/authentication/register"}
+                  className="text-white font-semibold bg-secondary py-3.5 rounded-sm px-7 hidden md:block hover:bg-primary duration-400 cursor-pointer"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -173,10 +207,12 @@ const NavBar = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
+
         <ul className="menu bg-base-200 min-h-full w-80 p-4 font-semibold text-primary">
           {menuItems}
-          {/* Mobile-only signup button in drawer */}
-          <li className="mt-4 block md:hidden">
+
+          {/* Mobile-only Signup */}
+          {!user && (<li className="mt-4 block md:hidden">
             <Link
               to={"/authentication/register"}
               className="text-white font-semibold bg-secondary hover:bg-primary duration-400 py-3 rounded-sm text-center"
@@ -184,7 +220,7 @@ const NavBar = () => {
             >
               Signup
             </Link>
-          </li>
+          </li>)}
         </ul>
       </div>
     </div>

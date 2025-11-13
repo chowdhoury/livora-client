@@ -15,7 +15,7 @@
   --color-base-300: #EAE6E0;
   --color-accent: #666666;
 }
-
+@import "@smastrom/react-rating/style.css";
 *{
   font-family: "Sora", sans-serif;
 }

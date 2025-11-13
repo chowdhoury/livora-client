@@ -1,10 +1,54 @@
-import { RiResetLeftLine } from "react-icons/ri";
+import { useContext } from "react";
+import { CiCircleList } from "react-icons/ci";
 import { Link } from "react-router";
 import house from "../../assets/house6.jpg";
 import logo from "../../assets/logo.svg";
-import { CiCircleList } from "react-icons/ci";
+import AuthContext from "../../Auth/AuthContext/AuthContext";
+import { toast } from "react-toastify";
 
 const AddProperties = () => {
+  const { user } = useContext(AuthContext);
+  const handleAddProperty = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const category = form.category.value;
+    const image = form.image.value;
+    const location = form.location.value;
+    const price = form.price.value;
+    const description = form.description.value;
+    const createdAt = new Date();
+
+    const propertyData = {
+      name,
+      category,
+      image,
+      location,
+      price,
+      description,
+      createdAt,
+      userEmail: user?.email,
+      userName: user?.displayName,
+    };
+    console.log(propertyData);
+    fetch("http://localhost:3000/api/properties", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(propertyData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast.success("Property added successfully!");
+        form.reset();
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error("Failed to add property.");
+      });
+  };
   return (
     <div className="relative">
       <img
@@ -20,26 +64,34 @@ const AddProperties = () => {
           <h2 className="text-[50px] text-primary font-bold text-center leading-tight">
             List Properties
           </h2>
-          <form action="">
-            <fieldset class="fieldset flex flex-col md:grid  md:grid-cols-2 text-start">
+          <form onSubmit={handleAddProperty}>
+            <fieldset className="fieldset flex flex-col md:grid  md:grid-cols-2 text-start">
               <div>
-                <label class="label text-[#333333]">User Name</label>
+                <label className="label text-[#333333]">User Name</label>
                 <input
                   type="text"
-                  class="input min-w-full text-primary"
+                  className="input min-w-full text-primary"
                   placeholder="Your Name"
+                  defaultValue={user?.displayName}
+                  readOnly
                 />
-                <label class="label text-[#333333] mt-2">Property Name</label>
+                <label className="label text-[#333333] mt-2">
+                  Property Name
+                </label>
                 <input
                   type="text"
-                  class="input min-w-full text-primary"
+                  className="input min-w-full text-primary"
                   placeholder="Golden Villa"
+                  name="name"
+                  required
                 />
                 <label className="label text-[#333333] mt-2">Category</label>
                 <select
                   className="input min-w-full text-primary"
                   defaultValue=""
                   disabled={false}
+                  name="category"
+                  required
                 >
                   <option value="" disabled>
                     Select Category
@@ -49,61 +101,57 @@ const AddProperties = () => {
                   <option value="commercial">Commercial</option>
                   <option value="land">Land</option>
                 </select>
-                {/* <label class="label text-[#333333]">Costings</label>
-                <input
-                  type="number"
-                  class="input min-w-full text-primary"
-                  placeholder="50000"
-                /> */}
-                <label class="label text-[#333333] mt-2">Photo URL</label>
+                <label className="label text-[#333333] mt-2">Photo URL</label>
                 <input
                   type="url"
-                  class="input min-w-full text-primary"
+                  className="input min-w-full text-primary"
                   placeholder="https://image.com"
+                  name="image"
+                  required
                 />
               </div>
               <div className="">
-                <label class="label text-[#333333]">Email</label>
+                <label className="label text-[#333333]">Email</label>
                 <input
                   type="email"
-                  class="input min-w-full text-primary"
+                  className="input min-w-full text-primary"
                   placeholder="example@abc.com"
+                  defaultValue={user?.email}
+                  readOnly
                 />
 
-                <label class="label text-[#333333] mt-2">
+                <label className="label text-[#333333] mt-2">
                   Property Location
                 </label>
                 <input
                   type="text"
-                  class="input min-w-full text-primary"
+                  className="input min-w-full text-primary"
                   placeholder="New York, USA"
+                  name="location"
+                  required
                 />
-                {/* <label class="label text-[#333333]">Category</label>
-                <input
-                  type="text"
-                  class="input min-w-full text-primary"
-                  placeholder="New York, USA"
-                /> */}
-                <label class="label text-[#333333] mt-2">Costings</label>
+                <label className="label text-[#333333] mt-2">Costings</label>
                 <input
                   type="number"
-                  class="input min-w-full text-primary"
+                  className="input min-w-full text-primary"
                   placeholder="50000"
+                  name="price"
+                  required
                 />
-                <label class="label text-[#333333] mt-2">
+                <label className="label text-[#333333] mt-2">
                   Property Description
                 </label>
                 <br />
                 <textarea
-                  name=""
                   className="bg-white rounded-sm text-primary p-2.5 w-full resize-none"
                   rows={1}
-                  placeholder="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum, aspernatur voluptatum rem necessita tibus corrupti officia?"
+                  placeholder="Describe the property..."
                   id=""
+                  name="description"
+                  required
                 ></textarea>
               </div>
-              <Link
-                to={"/authentication/login"}
+              <button
                 className="text-white font-semibold bg-secondary py-2.5 rounded-sm px-[26px] hover:bg-primary duration-400 cursor-pointer col-span-2 mt-5 text-center inline-block"
               >
                 <span className="flex gap-2 items-center justify-center text-[16px]">
@@ -112,7 +160,7 @@ const AddProperties = () => {
                   </span>
                   List
                 </span>
-              </Link>
+              </button>
             </fieldset>
           </form>
         </div>

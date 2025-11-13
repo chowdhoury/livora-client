@@ -1,19 +1,21 @@
-import { useEffect, useState } from "react";
+import { use, useContext, useEffect, useState } from "react";
 import PropertyCard from "../PropertyCard/PropertyCard";
 import Filter from "../SearchFilterHelp/Filter";
 import Help from "../SearchFilterHelp/Help";
 import Search from "../SearchFilterHelp/Search";
+import AuthContext from "../../../Auth/AuthContext/AuthContext";
 
 const PropertyContainer = () => {
-  const [properties, setProperties] = useState([]);
+  const {user}=useContext(AuthContext)
+  const [ratings,setRatings]=useState([])
   useEffect(() => {
-    fetch("http://localhost:3000/api/properties")
+    fetch(`http://localhost:3000/api/ratings?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
-        setProperties(data);
+        setRatings(data);
         // console.log(data);
       });
-  }, []);
+  }, [user?.email]);
   return (
     <div className="w-[95%] lg:w-9/12 mx-auto my-5 lg:my-30 gap-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
       <div className="col-span-2 grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -23,8 +25,8 @@ const PropertyContainer = () => {
         <section className="md:mt-10 lg:hidden">
           <Filter />
         </section>
-        {properties.map((property) => (
-          <PropertyCard key={property._id} property={property}></PropertyCard>
+        {ratings.map((rating) => (
+          <PropertyCard key={rating._id} rating={rating}></PropertyCard>
         ))}
       </div>
       <div className="flex flex-col ml-0 lg:ml-5">

@@ -11,6 +11,7 @@ import MyRatings from "../../Pages/MyRatings/MyRatings";
 import PropertiesDetails from "../../Pages/PropertiesDetails/PropertiesDetails";
 import Error from "../../Pages/Error/Error";
 import ForgetPassword from "../../Pages/Authentication/ForgetPassword/ForgetPassword";
+import PrivateRouter from "../PrivateRouter.jsx/PrivateRouter";
 
 export const router = createBrowserRouter([
     {
@@ -29,7 +30,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/properties/:id',
-                element: <PropertiesDetails></PropertiesDetails>
+                element: <PrivateRouter><PropertiesDetails></PropertiesDetails></PrivateRouter>,
             },
             {
                 path: '/authentication/register',
@@ -45,19 +46,19 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/user/list-property',
-                element: <AddProperties></AddProperties>
+                element: <PrivateRouter><AddProperties></AddProperties></PrivateRouter>
             },
             {
                 path: '/user/my-properties',
-                element: <MyProperties></MyProperties>
+                element: <PrivateRouter><MyProperties></MyProperties></PrivateRouter>
             },
             {
                 path: '/user/my-properties/update/:id',
-                element: <UpdateProperties></UpdateProperties>
+                element: <PrivateRouter><UpdateProperties></UpdateProperties></PrivateRouter>
             },
             {
                 path: 'user/my-ratings',
-                element: <MyRatings></MyRatings>
+                element: <PrivateRouter><MyRatings></MyRatings></PrivateRouter>
             }
             
         ]

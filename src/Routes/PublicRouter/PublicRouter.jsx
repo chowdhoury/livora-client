@@ -1,66 +1,84 @@
 import { createBrowserRouter } from "react-router";
-import MainLayout from "../../Layout/MainLayout/MainLayout";
-import Home from "../../Pages/Home/Home";
-import AllProperties from "../../Pages/AllProperties/AllProperties";
-import Register from "../../Pages/Authentication/Register/Register";
-import Login from "../../Pages/Authentication/Login/Login";
-import AddProperties from "../../Pages/AddProperties/AddProperties";
-import MyProperties from "../../Pages/MyProperties/MyProperties";
-import UpdateProperties from "../../Pages/UpdateProperties/UpdateProperties";
-import MyRatings from "../../Pages/MyRatings/MyRatings";
-import PropertiesDetails from "../../Pages/PropertiesDetails/PropertiesDetails";
-import Error from "../../Pages/Error/Error";
-import ForgetPassword from "../../Pages/Authentication/ForgetPassword/ForgetPassword";
-import PrivateRouter from "../PrivateRouter.jsx/PrivateRouter";
+import PrimaryLayout from "../../Layouts/PrimaryLayout/PrimaryLayout";
+import HomePage from "../../Pages/HomePage/HomePage";
+import ListedPropertiesPage from "../../Pages/ListedPropertiesPage/ListedPropertiesPage";
+import ListPropertyPage from "../../Pages/ListPropertyPage/ListPropertyPage";
+import MyFeedbacksPage from "../../Pages/MyFeedbacksPage/MyFeedbacksPage";
+import MyListingsPage from "../../Pages/MyListingsPage/MyListingsPage";
+import PasswordResetPage from "../../Pages/PasswordResetPage/PasswordResetPage";
+import PropertyDetailsPage from "../../Pages/PropertyDetailsPage/PropertyDetailsPage";
+import SignInPage from "../../Pages/SignInPage/SignInPage";
+import SignUpPage from "../../Pages/SignUpPage/SignUpPage";
+import PrivateRouter from "../PrivateRouter/PrivateRouter";
 
 export const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <MainLayout></MainLayout>,
-        errorElement: <Error></Error>,
-        children: [
-            {
-                index: true,
-                element:<Home></Home>
-            },
-            {
-                path: '/listed-properties',
-                loader: () => fetch('http://localhost:3000/api/properties'),
-                element: <AllProperties></AllProperties>
-            },
-            {
-                path: '/properties/:id',
-                element: <PrivateRouter><PropertiesDetails></PropertiesDetails></PrivateRouter>,
-            },
-            {
-                path: '/authentication/register',
-                element: <Register></Register>
-            },
-            {
-                path:'/authentication/login',
-                element: <Login></Login>
-            },
-            {
-                path:'/authentication/forget-password',
-                element: <ForgetPassword></ForgetPassword>
-            },
-            {
-                path: '/user/list-property',
-                element: <PrivateRouter><AddProperties></AddProperties></PrivateRouter>
-            },
-            {
-                path: '/user/my-properties',
-                element: <PrivateRouter><MyProperties></MyProperties></PrivateRouter>
-            },
-            {
-                path: '/user/my-properties/update/:id',
-                element: <PrivateRouter><UpdateProperties></UpdateProperties></PrivateRouter>
-            },
-            {
-                path: 'user/my-ratings',
-                element: <PrivateRouter><MyRatings></MyRatings></PrivateRouter>
-            }
-            
-        ]
-    }
-])
+  {
+    path: "/",
+    element: <PrimaryLayout />,
+    // errorElement: <Error></Error>,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: "/authentication/sign-up",
+        element: <SignUpPage />,
+      },
+      {
+        path: "/authentication/sign-in",
+        element: <SignInPage />,
+      },
+      {
+        path: "/authentication/password-reset",
+        element: <PasswordResetPage />,
+      },
+      {
+        path: "/listed-properties",
+        loader: async () => {
+          try {
+            const response = await fetch("http://localhost:3000/api/properties");
+            const data = await response.json();
+            return data;
+          } catch (error) {
+            return [];
+          }
+
+        } ,
+        element: <ListedPropertiesPage />,
+      },
+      {
+        path: "/listed-properties/:propertyId",
+        element: (
+          <PrivateRouter>
+            <PropertyDetailsPage />
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "/user/my-listings",
+        element: (
+          <PrivateRouter>
+            <MyListingsPage />
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "/user/my-feedbacks",
+        element: (
+          <PrivateRouter>
+            <MyFeedbacksPage />
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "/user/list-property",
+        element: (
+          <PrivateRouter>
+            <ListPropertyPage />
+          </PrivateRouter>
+        ),
+      },
+    ],
+  },
+]);

@@ -34,7 +34,7 @@ const SignIn = () => {
       await SignInUser(email, password);
       form.reset();
       toast.success("Sign In Successful");
-      navigate("/");
+      navigate(location.state || "/");
     } catch (error) {
       toast.error(error.message);
     }
@@ -44,6 +44,7 @@ const SignIn = () => {
     try {
       await googleSignIn();
       toast.success("Sign In Successful");
+      navigate(location.state || "/");
     } catch (error) {
       toast.error(error.message);
     }

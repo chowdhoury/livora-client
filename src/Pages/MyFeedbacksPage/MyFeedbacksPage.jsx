@@ -1,5 +1,7 @@
+import MyFeedback from "../../Components/MyFeedback/MyFeedback";
+
 const MyFeedbacksPage = () => {
-  return <div>My Feedbacks Page</div>;
+  return <MyFeedback/>;
 };
 
 export default MyFeedbacksPage;

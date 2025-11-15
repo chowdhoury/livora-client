@@ -10,41 +10,62 @@ import PropertyDetailsPage from "../../Pages/PropertyDetailsPage/PropertyDetails
 import SignInPage from "../../Pages/SignInPage/SignInPage";
 import SignUpPage from "../../Pages/SignUpPage/SignUpPage";
 import PrivateRouter from "../PrivateRouter/PrivateRouter";
+import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
+import PublicRouterLoader from "./PublicRouterLoader";
+import Loader from "../../Components/Shared/Loader/Loader";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <PrimaryLayout />,
-    // errorElement: <Error></Error>,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: (
+          <PublicRouterLoader>
+            <HomePage />
+          </PublicRouterLoader>
+        ),
       },
       {
         path: "/authentication/sign-up",
-        element: <SignUpPage />,
+        element: (
+          <PublicRouterLoader>
+            <SignUpPage />
+          </PublicRouterLoader>
+        ),
       },
       {
         path: "/authentication/sign-in",
-        element: <SignInPage />,
+        element: (
+          <PublicRouterLoader>
+            <SignInPage />
+          </PublicRouterLoader>
+        ),
       },
       {
         path: "/authentication/password-reset",
-        element: <PasswordResetPage />,
+        element: (
+          <PublicRouterLoader>
+            <PasswordResetPage />
+          </PublicRouterLoader>
+        ),
       },
       {
         path: "/listed-properties",
         loader: async () => {
           try {
-            const response = await fetch("http://localhost:3000/api/properties");
+            const response = await fetch(
+              "http://localhost:3000/api/properties"
+            );
             const data = await response.json();
             return data;
           } catch (error) {
             return [];
           }
-
-        } ,
+        },
+        hydrateFallbackElement: <Loader/>,
         element: <ListedPropertiesPage />,
       },
       {

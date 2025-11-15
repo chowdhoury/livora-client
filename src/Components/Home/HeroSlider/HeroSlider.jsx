@@ -21,7 +21,7 @@ const HeroSlider = () => {
             <figure>
               <img src={logo} className="h-5" alt="" />
             </figure>
-            <p className="text-secondary font-semibold">WELCOME TO LIVORA</p>
+            <p className="text-[#ED7D3A] font-semibold">WELCOME TO LIVORA</p>
           </div>
           <h1 className="font-extrabold lg:text-[70px] md:text-[50px] text-[30px] leading-tight">
             Invest Today in

@@ -17,7 +17,7 @@ const PerfectHome = () => {
         Find a Perfect Home
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 w-[95%] lg:w-9/12 mx-auto mt-15">
-        <div className="bg-white p-5 rounded-xl flex flex-col justify-center items-center text-center gap-3 shadow-lg hover:shadow-xl transition-shadow duration-300 group">
+        <div className="bg-base-100 p-5 rounded-xl flex flex-col justify-center items-center text-center gap-3 shadow-lg hover:shadow-xl transition-shadow duration-300 group">
           <span className="text-4xl text-white bg-primary p-5 rounded-full mb-4 inline-block group-hover:bg-secondary">
             <TbHomeSearch />
           </span>
@@ -27,7 +27,7 @@ const PerfectHome = () => {
             and transparent pricing.
           </p>
         </div>
-        <div className="bg-white p-5 rounded-xl flex flex-col justify-center items-center text-center gap-3 shadow-lg hover:shadow-xl transition-shadow duration-300 group">
+        <div className="bg-base-100 p-5 rounded-xl flex flex-col justify-center items-center text-center gap-3 shadow-lg hover:shadow-xl transition-shadow duration-300 group">
           <span className="text-4xl text-white bg-primary p-5 rounded-full mb-4 inline-block group-hover:bg-secondary">
             <BsPeople />
           </span>
@@ -37,7 +37,7 @@ const PerfectHome = () => {
             business.
           </p>
         </div>
-        <div className="bg-white p-5 rounded-xl flex flex-col justify-center items-center text-center gap-3 shadow-lg hover:shadow-xl transition-shadow duration-300 group">
+        <div className="bg-base-100 p-5 rounded-xl flex flex-col justify-center items-center text-center gap-3 shadow-lg hover:shadow-xl transition-shadow duration-300 group">
           <span className="text-4xl text-white bg-primary p-5 rounded-full mb-4 inline-block group-hover:bg-secondary">
             <HiOutlineDocumentDuplicate />
           </span>
@@ -47,7 +47,7 @@ const PerfectHome = () => {
             secure place.
           </p>
         </div>
-        <div className="bg-white p-5 rounded-xl flex flex-col justify-center items-center text-center gap-3 shadow-lg hover:shadow-xl transition-shadow duration-300 group">
+        <div className="bg-base-100 p-5 rounded-xl flex flex-col justify-center items-center text-center gap-3 shadow-lg hover:shadow-xl transition-shadow duration-300 group">
           <span className="text-4xl text-white bg-primary p-5 rounded-full mb-4 inline-block group-hover:bg-secondary">
             <GiHouseKeys />
           </span>

@@ -23,7 +23,7 @@ const Footer = () => {
         </div>
         <div className="flex-1 flex">
           <input
-            className="bg-white w-full px-4 py-4 h-12 rounded-l-sm focus:outline-none"
+            className="bg-base-100 w-full px-4 py-4 h-12 rounded-l-sm focus:outline-none"
             type="email"
             name=""
             id=""

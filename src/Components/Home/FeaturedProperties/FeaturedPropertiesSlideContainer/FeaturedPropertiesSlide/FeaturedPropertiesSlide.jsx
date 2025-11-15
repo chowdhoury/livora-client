@@ -4,7 +4,7 @@ const FeaturedPropertiesSlide = ({ property }) => {
   const { _id, category, image, name, location, description, costing } =
     property;
   return (
-    <div className="bg-white my-15 rounded-xl flex flex-col shadow-lg transition-shadow duration-300">
+    <div className="bg-base-100 my-15 rounded-xl flex flex-col shadow-lg transition-shadow duration-300">
       <div className="relative">
         <img
           src={image}

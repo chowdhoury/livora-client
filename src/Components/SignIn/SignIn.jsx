@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import AuthContext from "../../Auth/AuthContext/AuthContext";
 import { toast } from "react-toastify";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { LuLogIn } from "react-icons/lu";
 import house from "../../assets/house6.jpg";
 import logo from "../../assets/logo.svg";
@@ -12,6 +12,7 @@ const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { SignInUser, googleSignIn, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogin = async (event) => {
     event.preventDefault();

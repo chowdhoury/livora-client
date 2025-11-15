@@ -142,7 +142,7 @@ const ListProperty = () => {
                 </label>
                 <br />
                 <textarea
-                  className="bg-white rounded-sm text-primary p-2.5 w-full resize-none"
+                  className="bg-base-100 rounded-sm text-primary p-2.5 w-full resize-none"
                   rows={1}
                   placeholder="Describe the property..."
                   id=""

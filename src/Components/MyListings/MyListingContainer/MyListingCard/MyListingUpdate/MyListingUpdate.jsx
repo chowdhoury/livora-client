@@ -10,9 +10,9 @@ const MyListingUpdate = ({ handleOpenModal, property, setRefresh, refresh }) => 
     image,
     name,
     location,
-    price,
-    userName,
-    userEmail,
+    costing,
+    sellerName,
+    sellerEmail,
     description,
   } = property;
   const handleSubmit = (e) => {
@@ -77,7 +77,7 @@ const MyListingUpdate = ({ handleOpenModal, property, setRefresh, refresh }) => 
                 type="text"
                 className="input min-w-full text-primary"
                 placeholder="Your Name"
-                defaultValue={userName}
+                defaultValue={sellerName}
                 readOnly
               />
 
@@ -121,7 +121,7 @@ const MyListingUpdate = ({ handleOpenModal, property, setRefresh, refresh }) => 
                 type="email"
                 className="input min-w-full text-primary"
                 placeholder="example@abc.com"
-                defaultValue={userEmail}
+                defaultValue={sellerEmail}
                 readOnly
               />
 
@@ -141,7 +141,7 @@ const MyListingUpdate = ({ handleOpenModal, property, setRefresh, refresh }) => 
                 type="number"
                 className="input min-w-full text-primary"
                 placeholder="50000"
-                defaultValue={price}
+                defaultValue={costing}
                 name="price"
               />
 
@@ -149,7 +149,7 @@ const MyListingUpdate = ({ handleOpenModal, property, setRefresh, refresh }) => 
                 Property Description
               </label>
               <textarea
-                className="bg-white rounded-sm text-primary p-2.5 w-full resize-none"
+                className="bg-base-100 rounded-sm text-primary p-2.5 w-full resize-none"
                 rows={1}
                 placeholder="Property Description"
                 id=""

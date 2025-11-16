@@ -24,13 +24,21 @@ const MyListingCard = ({ property, setRefresh, refresh }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/api/properties/${_id}`, {
+        fetch(`${import.meta.env.VITE_api_base_url}/api/properties/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {
               setRefresh(!refresh);
+              fetch(`${import.meta.env.VITE_api_base_url}/api/ratings/${_id}`, {
+                method: "DELETE",
+              }).then((res) => res.json())
+                .catch((err) => console.error(err))
+                .then((res) => res.json())
+                .then((data) => {
+                  setRefresh(!refresh);
+                });
             } else {
               toast.error("Failed to delete the property");
             }
@@ -80,7 +88,7 @@ const MyListingCard = ({ property, setRefresh, refresh }) => {
         <div className="flex items-center justify-between my-3">
           <h2 className="text-[22px] font-medium ">${costing}</h2>
           <Link
-            to={`/properties/${_id}`}
+            to={`/listed-properties/${_id}`}
             className="text-primary font-semibold bg-base-200 border-2 hover:text-white border-primary py-3.5 rounded-sm px-[30px] hover:bg-primary duration-400 cursor-pointer"
           >
             View Property

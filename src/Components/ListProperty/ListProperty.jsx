@@ -14,7 +14,7 @@ const ListProperty = () => {
     const category = form.category.value;
     const image = form.image.value;
     const location = form.location.value;
-    const price = form.price.value;
+    const costing = form.price.value;
     const description = form.description.value;
     const createdAt = new Date();
 
@@ -23,14 +23,15 @@ const ListProperty = () => {
       category,
       image,
       location,
-      price,
+      costing,
       description,
       createdAt,
-      userEmail: user?.email,
-      userName: user?.displayName,
+      sellerEmail: user?.email,
+      sellerName: user?.displayName,
+      sellerImage: user?.photoURL || "",
     };
-    console.log(propertyData);
-    fetch("http://localhost:3000/api/properties", {
+    // console.log(propertyData);
+    fetch(`${import.meta.env.VITE_api_base_url}/api/properties`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,17 +40,18 @@ const ListProperty = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         toast.success("Property added successfully!");
         form.reset();
       })
       .catch((err) => {
-        console.error(err);
+        // console.error(err);
         toast.error("Failed to add property.");
       });
   };
   return (
     <div className="relative">
+      <title>List Property</title>
       <img
         src={house}
         className="min-h-[1200px] md:min-h-[800px] lg:max-h-screen w-full -mb-40"
@@ -95,10 +97,10 @@ const ListProperty = () => {
                   <option value="" disabled>
                     Select Category
                   </option>
-                  <option value="rent">Rent</option>
-                  <option value="sale">Sale</option>
-                  <option value="commercial">Commercial</option>
-                  <option value="land">Land</option>
+                  <option value="Rent">Rent</option>
+                  <option value="Sale">Sale</option>
+                  <option value="Commercial">Commercial</option>
+                  <option value="Land">Land</option>
                 </select>
                 <label className="label text-[#333333] mt-2">Photo URL</label>
                 <input

@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import { SiGnuprivacyguard } from "react-icons/si";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import house from "../../assets/house6.jpg";
 import logo from "../../assets/logo.svg";
@@ -10,6 +10,7 @@ import AuthContext from "../../Auth/AuthContext/AuthContext";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
   const { createUserWithEmail, updateUserProfile, googleSignIn, setLoading } =
     useContext(AuthContext);
 
@@ -44,6 +45,8 @@ const SignUp = () => {
 
       form.reset();
       toast.success("Sign Up Successful");
+      setLoading(false);
+      navigate("/");
     } catch (error) {
       toast.error(error.message);
     }
@@ -54,6 +57,7 @@ const SignUp = () => {
       const result = await googleSignIn();
 
       toast.success("Sign In Successful");
+      navigate("/");
     } catch (error) {
       toast.error(error.message);
     }
@@ -61,6 +65,7 @@ const SignUp = () => {
 
   return (
     <div className="relative">
+      <title>Sign Up</title>
       <img
         src={house}
         className="min-h-screen md:min-h-[800px] lg:max-h-screen  w-full -mb-40"

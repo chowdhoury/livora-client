@@ -5,6 +5,7 @@ import MyListingContainer from './MyListingContainer/MyListingContainer';
 const MyListings = () => {
     return (
         <div>
+            <title>My Listings</title>
             <section>
                 <MyListingHero/>
             </section>

@@ -4,6 +4,7 @@ import MyFeedbackHero from "./MyFeedbackHero/MyFeedbackHero";
 const MyFeedback = () => {
   return (
     <div>
+      <title>My Feedbacks</title>
       <section>
         <MyFeedbackHero />
           </section>

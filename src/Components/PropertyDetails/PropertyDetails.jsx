@@ -6,6 +6,7 @@ import PropertyDetailsContainer from './PropertyDetailsContainer/PropertyDetails
 const PropertyDetails = () => {
     return (
         <div>
+            
             <section>
                 <PropertyDetailsHero/>
             </section>

@@ -2,13 +2,18 @@ import React from 'react';
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router";
 import AuthContext from '../../../../Auth/AuthContext/AuthContext';
+import { Rating } from '@smastrom/react-rating';
 
 const MyFeedbackCard = ({ rating }) => {
   const { user } = useContext(AuthContext);
   // console.log(rating);
   const [property, setProperty] = useState({});
   useEffect(() => {
-    fetch(`http://localhost:3000/api/properties/${rating?.propertyId}`)
+    fetch(
+      `${import.meta.env.VITE_api_base_url}/api/properties/${
+        rating?.propertyId
+      }`
+    )
       .then((res) => res.json())
       .then((data) => {
         setProperty(data);
@@ -36,7 +41,9 @@ const MyFeedbackCard = ({ rating }) => {
             {rating.createdAt.split("T")[0]}
           </p>
         </div>
-        <div className="my-2 ">5Star</div>
+        <div className="my-2 ">
+          <Rating style={{ maxWidth: 180 }} value={rating.rating} readOnly />
+        </div>
         <p className="text-secondary-contentline-clamp-2">
           {rating.description}
         </p>
@@ -45,7 +52,7 @@ const MyFeedbackCard = ({ rating }) => {
         <div className="flex items-center justify-between mt-5">
           <h2 className="text-[22px] font-medium ">${costing}</h2>
           <Link
-            to={`/properties/${_id}`}
+            to={`/listed-properties/${_id}`}
             className="text-white font-semibold bg-secondary py-3.5 rounded-sm px-[30px] hover:bg-primary duration-400 cursor-pointer"
           >
             View Property

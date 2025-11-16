@@ -12,7 +12,7 @@ const FeaturedPropertiesSlideContainer = () => {
     const loadProperties = async () => {
       try {
         const res = await fetch(
-          "http://localhost:3000/api/properties/featured"
+          `${import.meta.env.VITE_api_base_url}/api/properties/featured`
         );
         const data = await res.json();
         setProperties(data);
@@ -34,7 +34,7 @@ const FeaturedPropertiesSlideContainer = () => {
           <p className="text-secondary-focus font-semibold">Our Top Picks</p>
         </div>
 
-        <h2 className="text-[50px] text-primary font-bold text-center">
+        <h2 className="text-[30px] md:text-[40px] lg:text-[50px] text-primary font-bold text-center">
           Discover top-rated homes.
         </h2>
         <>

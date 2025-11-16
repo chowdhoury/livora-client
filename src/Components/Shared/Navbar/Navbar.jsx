@@ -1,8 +1,8 @@
 import { useContext, useEffect, useRef, useState } from "react";
+import { Link, NavLink } from "react-router";
+import { toast } from "react-toastify";
 import AuthContext from "../../../Auth/AuthContext/AuthContext";
 import logo from "../../../assets/logo.svg";
-import { toast } from "react-toastify";
-import { Link, NavLink } from "react-router";
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -163,7 +163,9 @@ const Navbar = () => {
             </label>
 
             {/* Logo */}
-            <img src={logo} className="h-8" alt="Logo" />
+            <Link to={"/"}>
+              <img src={logo} className="h-8" alt="Logo" />
+            </Link>
           </div>
 
           {/* Desktop menu */}
@@ -219,7 +221,7 @@ const Navbar = () => {
                     <p className="font-semibold text-secondary-content">
                       {displayName}
                     </p>
-                    <p className="text-sm text-primary mt-1">{email}</p>
+                    <p className="text-sm text-primary mt-1 overflow-hidden">{email}</p>
 
                     <Link
                       onClick={handleLogOut}
@@ -278,7 +280,6 @@ const Navbar = () => {
       </div>
     </div>
   );
-
 };
 
 export default Navbar;

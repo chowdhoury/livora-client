@@ -23,6 +23,7 @@ const PasswordReset = () => {
 
   return (
     <div className="relative">
+      <title>Reset Password</title>
       <img src={house} className="min-h-screen w-full -mb-40" alt="" />
       <div className="flex flex-col justify-center items-center text-center text-white absolute z-10 w-full h-full top-0 left-0 bg-[#2F3D7E]/60">
         <div className="max-w-3xl px-10 bg-[#F6F8FF]/70 py-7 rounded-2xl -mt-15">

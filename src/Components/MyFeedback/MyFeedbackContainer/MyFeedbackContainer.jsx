@@ -3,16 +3,22 @@ import MyFeedbackCard from "./MyFeedbackCard/MyFeedbackCard";
 import MyFeedbackFilter from "./MyFeedbackFilter/MyFeedbackFilter";
 import Help from "../../Shared/Help/Help";
 import AuthContext from "../../../Auth/AuthContext/AuthContext";
+import LoaderElement from "../../Shared/LoaderElement/LoaderElement";
 
 const MyFeedbackContainer = () => {
+  const [elementLoading, setElementLoading] = useState(false);
   const { user } = useContext(AuthContext);
   const [ratings, setRatings] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:3000/api/ratings?email=${user?.email}`)
+    setElementLoading(true);
+    fetch(
+      `${import.meta.env.VITE_api_base_url}/api/ratings?email=${user?.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setRatings(data);
         // console.log(data);
+        setElementLoading(false);
       });
   }, [user?.email]);
   return (
@@ -21,20 +27,44 @@ const MyFeedbackContainer = () => {
         {/* <section className="mt-10 lg:hidden">
           <Search />
         </section> */}
-        <section className="md:mt-10 lg:hidden">
+        {/* <section className="md:mt-10 lg:hidden">
           <MyFeedbackFilter />
-        </section>
-        {ratings.map((rating) => (
+        </section> */}
+        {elementLoading ? (
+          <div className="col-span-2 flex justify-center items-center">
+            <LoaderElement />
+          </div>
+        ) : ratings.length === 0 ? (
+          <h1 className="text-3xl font-bold text-center col-span-2">
+            You haven't any Feedback yet.
+          </h1>
+        ) : (
+          ratings.map((rating) => (
+            <MyFeedbackCard key={rating._id} rating={rating}></MyFeedbackCard>
+          ))
+        )}
+        {/* {ratings.length === 0 ? (
+          <h1 className="text-3xl font-bold text-center col-span-2">
+            No Listed Properties Found!
+          </h1>
+        ) : (
+          <>
+            {ratings.map((rating) => (
+              <MyFeedbackCard key={rating._id} rating={rating}></MyFeedbackCard>
+            ))}
+          </>
+        )} */}
+        {/* {ratings.map((rating) => (
           <MyFeedbackCard key={rating._id} rating={rating}></MyFeedbackCard>
-        ))}
+        ))} */}
       </div>
       <div className="flex flex-col ml-0 lg:ml-5">
         <div className="hidden lg:block">
           {/* <Search />
           <section className="mt-10"> */}
-            <MyFeedbackFilter />
+          {/* <MyFeedbackFilter /> */}
           {/* </section> */}
-          <section className="mt-10">
+          <section className="">
             <Help />
           </section>
         </div>

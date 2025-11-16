@@ -13,7 +13,7 @@ const PerfectHome = () => {
         </figure>
         <p className="text-secondary-focus font-semibold">WELCOME TO LIVORA</p>
       </div>
-      <h2 className="text-[50px] text-primary font-bold text-center">
+      <h2 className="text-[30px] md:text-[40px] lg:text-[50px] text-primary font-bold text-center">
         Find a Perfect Home
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 w-[95%] lg:w-9/12 mx-auto mt-15">

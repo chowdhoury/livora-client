@@ -53,6 +53,7 @@ const SignIn = () => {
 
   return (
     <div className="relative">
+      <title>Sign In</title>
       <img
         src={house}
         className="min-h-screen md:min-h-[800px] lg:max-h-screen  w-full -mb-40"

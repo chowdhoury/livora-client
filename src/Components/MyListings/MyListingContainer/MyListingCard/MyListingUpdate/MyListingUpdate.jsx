@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { use, useContext } from 'react';
 import logo from '../../../../../assets/logo.svg'
 import { toast } from "react-toastify";
 import { GrUpdate } from "react-icons/gr";
+import AuthContext from '../../../../../Auth/AuthContext/AuthContext';
 
 const MyListingUpdate = ({ handleOpenModal, property, setRefresh, refresh }) => {
+  const {user}=useContext(AuthContext);
       const {
     _id,
     category,
@@ -12,9 +14,9 @@ const MyListingUpdate = ({ handleOpenModal, property, setRefresh, refresh }) => 
     location,
     costing,
     sellerName,
-    sellerEmail,
     description,
   } = property;
+  // console.log(property);
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -29,10 +31,10 @@ const MyListingUpdate = ({ handleOpenModal, property, setRefresh, refresh }) => 
       category: updatedCategory,
       image: updatedImage,
       location: updatedLocation,
-      price: updatedPrice,
+      costing: updatedPrice,
       description: updatedDescription,
     };
-    fetch(`http://localhost:3000/api/properties/${_id}`, {
+    fetch(`${import.meta.env.VITE_api_base_url}/api/properties/${_id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -42,12 +44,12 @@ const MyListingUpdate = ({ handleOpenModal, property, setRefresh, refresh }) => 
       .then((res) => res.json())
       .then((data) => {
         setRefresh(!refresh);
-        console.log(data);
+        // console.log(data);
         handleOpenModal(false);
         toast.success("Property updated successfully!");
       })
       .catch((err) => {
-        console.error(err);
+        // console.error(err);
         toast.error("Failed to update property.");
       });
   };
@@ -99,10 +101,10 @@ const MyListingUpdate = ({ handleOpenModal, property, setRefresh, refresh }) => 
                 <option value="" disabled>
                   Select Category
                 </option>
-                <option value="rent">Rent</option>
-                <option value="sale">Sale</option>
-                <option value="commercial">Commercial</option>
-                <option value="land">Land</option>
+                <option value="Rent">Rent</option>
+                <option value="Sale">Sale</option>
+                <option value="Commercial">Commercial</option>
+                <option value="Land">Land</option>
               </select>
 
               <label className="label text-[#333333] mt-2">Photo URL</label>
@@ -121,7 +123,7 @@ const MyListingUpdate = ({ handleOpenModal, property, setRefresh, refresh }) => 
                 type="email"
                 className="input min-w-full text-primary"
                 placeholder="example@abc.com"
-                defaultValue={sellerEmail}
+                defaultValue={user?.email}
                 readOnly
               />
 

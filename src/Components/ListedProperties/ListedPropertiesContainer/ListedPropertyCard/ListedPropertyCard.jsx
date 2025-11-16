@@ -4,7 +4,7 @@ const ListedPropertyCard = ({ property }) => {
   const { _id, category, image, name, sellerName, location, description, costing } =
     property;
   return (
-    <div className="bg-base-200 rounded-xl flex flex-col shadow-lg transition-shadow duration-300">
+    <div className="bg-base-200 h-fit rounded-xl flex flex-col shadow-lg transition-shadow duration-300">
       <div className="relative">
         <img
           src={image}
@@ -21,7 +21,7 @@ const ListedPropertyCard = ({ property }) => {
           <p className="text-secondary font-semibold">{sellerName}</p>
           <p className="text-primary font-medium ">{location}</p>
         </div>
-        <p className="text-secondary-content my-5 line-clamp-2">
+        <p className="text-secondary-content my-5 line-clamp-1">
           {description}
         </p>
 

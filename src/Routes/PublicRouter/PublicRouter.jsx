@@ -57,7 +57,7 @@ export const router = createBrowserRouter([
         loader: async () => {
           try {
             const response = await fetch(
-              "http://localhost:3000/api/properties"
+              `${import.meta.env.VITE_api_base_url}/api/properties`
             );
             const data = await response.json();
             return data;
